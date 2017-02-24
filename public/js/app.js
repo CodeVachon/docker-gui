@@ -126,21 +126,21 @@
 	                        _reactRouter.Link,
 	                        { to: "/containers", activeClassName: "active", className: "btn" },
 	                        "Containers"
-	                    ),
-	                    _react2.default.createElement(
-	                        "p",
-	                        { className: "version" },
-	                        _react2.default.createElement(
-	                            "code",
-	                            null,
-	                            this.state.dockerVersion
-	                        )
 	                    )
 	                ),
 	                _react2.default.createElement(
 	                    "section",
 	                    { id: "AppContent" },
 	                    this.props.children
+	                ),
+	                _react2.default.createElement(
+	                    "p",
+	                    { className: "version" },
+	                    _react2.default.createElement(
+	                        "code",
+	                        null,
+	                        this.state.dockerVersion
+	                    )
 	                )
 	            );
 	        } // close render

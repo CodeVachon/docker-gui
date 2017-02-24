@@ -16,10 +16,6 @@ body {
     right: 1em;
     left: 1em;
     height: 3em; }
-    #Application #AppNav code {
-      position: absolute;
-      bottom: 0;
-      right: 0; }
   #Application #AppContent {
     position: absolute;
     top: 5em;
@@ -27,19 +23,25 @@ body {
     bottom: 0em;
     left: 0em;
     padding: 0 1em 1em 1em;
-    overflow: auto;
-    font-size: 1.3em; }
+    overflow: auto; }
   #Application ul {
     margin: 0;
     padding: 0;
     list-style: none; }
+
+.version {
+  position: absolute;
+  bottom: 1em;
+  right: 1em;
+  margin: 0; }
 
 table.formatted {
   margin: 0;
   padding: 0;
   width: 100%;
   border-spacing: 0;
-  border-collapse: collapse; }
+  border-collapse: collapse;
+  font-size: 1.4em; }
   table.formatted th, table.formatted td {
     text-align: left;
     white-space: nowrap;
@@ -47,14 +49,16 @@ table.formatted {
   table.formatted thead {
     display: block;
     background-color: #1a1a1a;
-    border-radius: 0.2em; }
+    border-radius: 0.25em; }
   table.formatted tbody {
     display: block;
     overflow: scroll;
     width: 100%; }
     table.formatted tbody tr:nth-child(even) {
       background-color: #3b3b3b;
-      border-radius: 0.2em; }
+      border-radius: 0.25em; }
+    table.formatted tbody .fa-square-o {
+      margin-right: 0.2em; }
   table.formatted tfoot td, table.formatted tfoot th {
     padding: 0.6em 0 0 0; }
 
@@ -71,7 +75,7 @@ table.docker-containers tbody tr td:nth-child(3) {
   cursor: pointer;
   display: inline-block;
   border: 1px #1a1a1a solid;
-  border-radius: 0.2em;
+  border-radius: 0.25em;
   padding: 1em 1.5em;
   margin-right: 0.5em;
   color: #eee;

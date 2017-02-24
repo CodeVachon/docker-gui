@@ -33,11 +33,11 @@ class AppLayout extends React.Component {
                 <nav id="AppNav">
                     <Link to="/images" activeClassName="active" className="btn">Images</Link>
                     <Link to="/containers" activeClassName="active" className="btn">Containers</Link>
-                    <p className="version"><code>{ this.state.dockerVersion }</code></p>
                 </nav>
                 <section id="AppContent">
                     { this.props.children }
                 </section>
+                <p className="version"><code>{ this.state.dockerVersion }</code></p>
             </section>
         );
     } // close render

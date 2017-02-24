@@ -1,7 +1,7 @@
 $mainBGColor: #333;
 $mainFGColor: #eee;
 
-$borderRadius: 0.2em;
+$borderRadius: 0.25em;
 
 body {
     background-color: $mainBGColor;
@@ -17,11 +17,6 @@ body {
         position: absolute;
         top: 1em; right: 1em; left: 1em;
         height: 3em;
-        code {
-            position: absolute;
-            bottom: 0;
-            right: 0;
-        }
     }
 
     #AppContent {
@@ -29,7 +24,6 @@ body {
         top: 5em; right: 0em; bottom: 0em; left: 0em;
         padding: 0 1em 1em 1em;
         overflow: auto;
-        font-size: 1.3em;
     }
 
     ul {
@@ -39,12 +33,20 @@ body {
     }
 }
 
+.version {
+    position: absolute;
+    bottom: 1em;
+    right: 1em;
+    margin: 0;
+}
+
 table.formatted {
     margin: 0;
     padding: 0;
     width: 100%;
     border-spacing: 0;
     border-collapse: collapse;
+    font-size: 1.4em;
     th, td {
         text-align: left;
         white-space: nowrap;
@@ -62,6 +64,9 @@ table.formatted {
         tr:nth-child(even) {
             background-color: lighten($mainBGColor, 3%);
             border-radius: $borderRadius;
+        }
+        .fa-square-o {
+            margin-right: 0.2em;
         }
     }
     tfoot {
