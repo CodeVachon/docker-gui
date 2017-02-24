@@ -1,0 +1,108 @@
+$mainBGColor: #333;
+$mainFGColor: #eee;
+
+$borderRadius: 0.2em;
+
+body {
+    background-color: $mainBGColor;
+    color: $mainFGColor;
+    padding: 0;
+    margin: 0;
+}
+
+#Application {
+    position: absolute;
+    top: 0; right: 0; bottom: 0; left: 0;
+    #AppNav {
+        position: absolute;
+        top: 1em; right: 1em; left: 1em;
+        height: 3em;
+        code {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+        }
+    }
+
+    #AppContent {
+        position: absolute;
+        top: 5em; right: 0em; bottom: 0em; left: 0em;
+        padding: 0 1em 1em 1em;
+        overflow: auto;
+        font-size: 1.3em;
+    }
+
+    ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+}
+
+table.formatted {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    border-spacing: 0;
+    border-collapse: collapse;
+    th, td {
+        text-align: left;
+        white-space: nowrap;
+        padding: 0.6em 0.8em;
+    }
+    thead {
+        display: block;
+        background-color: darken($mainBGColor, 10%);
+        border-radius: $borderRadius;
+    }
+    tbody {
+        display: block;
+        overflow: scroll;
+        width: 100%;
+        tr:nth-child(even) {
+            background-color: lighten($mainBGColor, 3%);
+            border-radius: $borderRadius;
+        }
+    }
+    tfoot {
+        td, th {
+            padding: 0.6em 0 0 0;
+        }
+    }
+}
+
+.toggle {
+    cursor: pointer;
+}
+
+.btn {
+    cursor: pointer;
+    display: inline-block;
+    border: 1px darken($mainBGColor, 10%) solid;
+    border-radius: $borderRadius;
+    padding: 1em 1.5em;
+    margin-right: 0.5em;
+    color: $mainFGColor;
+    text-decoration: none;
+    transition: 0.5s;
+    background-color: lighten($mainBGColor, 5%);
+    outline: none;
+    &:hover {
+        background-color: lighten($mainBGColor, 15%);
+        color: lighten($mainFGColor, 5%);
+    }
+    &.active {
+        transition: 0.2s;
+        background-color: darken($mainBGColor, 10%);
+        &:hover {
+            background-color: darken($mainBGColor, 10%);
+        }
+    }
+    &.disabled {
+        background-color: darken($mainBGColor, 10%);
+        color: darken($mainFGColor, 30%);
+        &:hover {
+            background-color: darken($mainBGColor, 10%);
+        }
+    }
+}

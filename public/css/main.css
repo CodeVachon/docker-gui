@@ -1,0 +1,88 @@
+body {
+  background-color: #333;
+  color: #eee;
+  padding: 0;
+  margin: 0; }
+
+#Application {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0; }
+  #Application #AppNav {
+    position: absolute;
+    top: 1em;
+    right: 1em;
+    left: 1em;
+    height: 3em; }
+    #Application #AppNav code {
+      position: absolute;
+      bottom: 0;
+      right: 0; }
+  #Application #AppContent {
+    position: absolute;
+    top: 5em;
+    right: 0em;
+    bottom: 0em;
+    left: 0em;
+    padding: 0 1em 1em 1em;
+    overflow: auto;
+    font-size: 1.3em; }
+  #Application ul {
+    margin: 0;
+    padding: 0;
+    list-style: none; }
+
+table.formatted {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  border-spacing: 0;
+  border-collapse: collapse; }
+  table.formatted th, table.formatted td {
+    text-align: left;
+    white-space: nowrap;
+    padding: 0.6em 0.8em; }
+  table.formatted thead {
+    display: block;
+    background-color: #1a1a1a;
+    border-radius: 0.2em; }
+  table.formatted tbody {
+    display: block;
+    overflow: scroll;
+    width: 100%; }
+    table.formatted tbody tr:nth-child(even) {
+      background-color: #3b3b3b;
+      border-radius: 0.2em; }
+  table.formatted tfoot td, table.formatted tfoot th {
+    padding: 0.6em 0 0 0; }
+
+.toggle {
+  cursor: pointer; }
+
+.btn {
+  cursor: pointer;
+  display: inline-block;
+  border: 1px #1a1a1a solid;
+  border-radius: 0.2em;
+  padding: 1em 1.5em;
+  margin-right: 0.5em;
+  color: #eee;
+  text-decoration: none;
+  transition: 0.5s;
+  background-color: #404040;
+  outline: none; }
+  .btn:hover {
+    background-color: #595959;
+    color: #fbfbfb; }
+  .btn.active {
+    transition: 0.2s;
+    background-color: #1a1a1a; }
+    .btn.active:hover {
+      background-color: #1a1a1a; }
+  .btn.disabled {
+    background-color: #1a1a1a;
+    color: #a2a2a2; }
+    .btn.disabled:hover {
+      background-color: #1a1a1a; }
