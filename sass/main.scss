@@ -71,6 +71,21 @@ table.formatted {
     }
 }
 
+table.docker-images {
+    tbody tr {
+        td:nth-child(2) {
+            width: 100%;
+        }
+    }
+}
+table.docker-containers {
+    tbody tr {
+        td:nth-child(3) {
+            width: 100%;
+        }
+    }
+}
+
 .toggle {
     cursor: pointer;
 }

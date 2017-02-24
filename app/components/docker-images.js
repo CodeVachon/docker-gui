@@ -98,7 +98,7 @@ class DockerImages extends React.Component {
     render() {
         return (
             <section>
-                <table className="formatted">
+                <table className="formatted docker-images">
                     <thead>
                         <tr>
                             <th />

@@ -26568,7 +26568,7 @@
 	                null,
 	                _react2.default.createElement(
 	                    "table",
-	                    { className: "formatted" },
+	                    { className: "formatted docker-images" },
 	                    _react2.default.createElement(
 	                        "thead",
 	                        null,
@@ -26898,7 +26898,7 @@
 	                null,
 	                _react2.default.createElement(
 	                    "table",
-	                    { className: "formatted" },
+	                    { className: "formatted docker-containers" },
 	                    _react2.default.createElement(
 	                        "thead",
 	                        null,

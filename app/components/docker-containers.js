@@ -92,7 +92,7 @@ class DockerContainers extends React.Component {
     render() {
         return (
             <section>
-                <table className="formatted">
+                <table className="formatted docker-containers">
                     <thead>
                         <tr>
                             <th />
