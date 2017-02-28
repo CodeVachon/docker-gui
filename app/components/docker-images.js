@@ -4,7 +4,7 @@ import UpdateTable from "./../helpers/updateTable";
 import moment from "moment";
 import $ from "jquery"
 import prettyBytes from "pretty-bytes";
-
+import Progress from "./progress";
 
 const getFormattedImageId = function(imageData) {
     return imageData.Id.split(":")[1].slice(0,12);
@@ -32,7 +32,7 @@ class DockerImageRow extends React.Component {
         return (
             <tr>
                 <td>
-                    <i className={ "toggle fa " + ((checked)?"fa-check-square-o":"fa-square-o") } onClick={ this._handleClick }/>
+                    <i className={ "toggle fa " + ((this.props.isLocked)?"locked ":"") + ((checked)?"fa-check-square-o":"fa-square-o") } onClick={ this._handleClick }/>
                 </td>
                 <td>{ repo }</td>
                 <td>{ tag }</td>
@@ -47,7 +47,9 @@ class DockerImageRow extends React.Component {
         event.preventDefault();
         event.stopPropagation();
 
-        this.props.onToggle(this.state.imageID);
+        if (!this.props.isLocked) {
+            this.props.onToggle(this.state.imageID);
+        }
     } // close _handleClick
 } // close DockerImageRow
 
@@ -58,13 +60,18 @@ class DockerImages extends React.Component {
 
         this.state = {
             images: [],
-            selectedImages: []
+            selectedImages: [],
+            working: false,
+            count: 0
         };
 
         this.interval = null;
 
         this._toggleImageID = this._toggleImageID.bind(this);
         this._deleteSelectedImagesClick = this._deleteSelectedImagesClick.bind(this);
+        this._deleteSelectedImages = this._deleteSelectedImages.bind(this);
+
+        $(window).on("resize", UpdateTable);
     } // close constructor
 
     componentDidMount() {
@@ -80,11 +87,10 @@ class DockerImages extends React.Component {
 
     componentDidUpdate() {
         UpdateTable();
-        $(window).on("resize", UpdateTable);
     } // close componentDidUpdate
 
     _updateImagesData () {
-        dockerapi.get("images/json", (error, data) => {
+        new dockerapi.get("images/json", (error, data) => {
             if (error) {
                 console.log(error);
             } else {
@@ -112,24 +118,36 @@ class DockerImages extends React.Component {
                     <tfoot>
                         <tr>
                             <td colSpan="6">
-                                <button className={ "btn" + ((this.state.selectedImages.length > 0)?"":" disabled") } onClick={ this._deleteSelectedImagesClick }>Remove Selected</button>
+                                { (this.state.working)?(
+                                        <Progress value={ parseInt(((this.state.count-this.state.selectedImages.length)/this.state.count)*100) } />
+                                    ):(
+                                        <button className={ "btn" + ((this.state.selectedImages.length > 0)?"":" disabled") } onClick={ this._deleteSelectedImagesClick }>Remove Selected</button>
+                                    )
+                                }
                             </td>
                         </tr>
                     </tfoot>
-                    <tbody>
-                        {
-                            this.state.images.map( image => {
-                                return (
-                                    <DockerImageRow
-                                        key={ `image-${image.Id}` }
-                                        image={ image }
-                                        onToggle={ this._toggleImageID }
-                                        isSelected={ this.state.selectedImages.some( (selectedImage) => { return selectedImage == getFormattedImageId(image) } ) }
-                                    />
-                                );
-                            })
-                        }
-                    </tbody>
+                    {
+                        (Array.isArray(this.state.images))?(
+                            <tbody>
+                                {
+                                    this.state.images.map( image => {
+                                        return (
+                                            <DockerImageRow
+                                                key={ `image-${image.Id}` }
+                                                image={ image }
+                                                onToggle={ this._toggleImageID }
+                                                isSelected={ this.state.selectedImages.some( (selectedImage) => { return selectedImage == getFormattedImageId(image) } ) }
+                                                isLocked={ this.state.working }
+                                            />
+                                        );
+                                    })
+                                }
+                            </tbody>
+                        ):(
+                            <tbody />
+                        )
+                    }
                 </table>
             </section>
         );
@@ -139,18 +157,36 @@ class DockerImages extends React.Component {
         event.preventDefault();
         event.stopPropagation();
 
-        this.state.selectedImages.forEach( (imageId) => {
-            dockerapi.delete(`images/${imageId}`, (error, data) => {
+        this.setState({
+            working: true,
+            count: this.state.selectedImages.length
+        }, () => {
+            this._deleteSelectedImages();
+        });
+    } // close _deleteSelectedImagesClick
+
+    _deleteSelectedImages() {
+        if (this.state.selectedImages.length > 0) {
+            const selectedImages = this.state.selectedImages;
+            const imageId = selectedImages.pop();
+            new dockerapi.delete(`images/${imageId}`, (error, data) => {
                 if (error) {
-                    console.log(error);
-                } else {
+                    console.error(error);
+                }
+                if (data) {
                     console.log(data);
                 }
-            })
-        })
-
-        this.setState({ selectedImages: [] });
-    }
+                this.setState({
+                    working: true,
+                    selectedImages: selectedImages
+                }, () => {
+                    this._deleteSelectedImages()
+                });
+            });
+        } else {
+            this.setState({ working: false });
+        }
+    } // close _deleteSelectedImages
 
     _toggleImageID(imageId) {
         const selectedImages = this.state.selectedImages;

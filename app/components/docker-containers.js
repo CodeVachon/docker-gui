@@ -59,6 +59,8 @@ class DockerContainers extends React.Component {
         };
 
         this.interval = null;
+
+        $(window).on("resize", UpdateTable);
     } // close constructor
 
     componentDidMount() {
@@ -74,11 +76,10 @@ class DockerContainers extends React.Component {
 
     componentDidUpdate() {
         UpdateTable();
-        $(window).on("resize", UpdateTable);
     } // close componentDidUpdate
 
     _updateContainerData () {
-        dockerapi.get("containers/json?all=true", (error, data) => {
+        new dockerapi.get("containers/json?all=true", (error, data) => {
             if (error) {
                 console.log(error);
             } else {

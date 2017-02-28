@@ -2,6 +2,7 @@ $mainBGColor: #333;
 $mainFGColor: #eee;
 
 $borderRadius: 0.25em;
+$primaryColor: #5BC0DE;
 
 body {
     background-color: $mainBGColor;
@@ -68,6 +69,11 @@ table.formatted {
         .fa-square-o {
             margin-right: 0.2em;
         }
+        .toggle {
+            &.locked {
+                color: darken($mainFGColor, 10%);
+            }
+        }
     }
     tfoot {
         td, th {
@@ -124,5 +130,19 @@ table.docker-containers {
         &:hover {
             background-color: darken($mainBGColor, 10%);
         }
+    }
+}
+
+.progress {
+    display: block;
+    margin: 0.25em 0;
+    border: 1px darken($mainBGColor, 10%) solid;
+    border-radius: $borderRadius;
+    width: 65%;
+    height: 1em;
+    overflow: hidden;
+    .progress-bar {
+        background-color: $primaryColor;
+        height: 1em;
     }
 }
